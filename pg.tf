@@ -1,6 +1,6 @@
 resource "aws_db_parameter_group" "main" {
   name        = "${var.tenant}-${var.name}-rds-pg-${var.environment}"
-  description = "Managed by Cloud&Cloud"
+  description = "Managed by Magicorn"
   family      = (var.aurora_cluster == true) ? var.aurora_parameter_group : var.parameter_group
 
   dynamic "parameter" {
@@ -16,6 +16,7 @@ resource "aws_db_parameter_group" "main" {
     Tenant      = var.tenant
     Project     = var.name
     Environment = var.environment
+    Maintainer  = "Magicorn"
     Terraform   = "yes"
   }
 }

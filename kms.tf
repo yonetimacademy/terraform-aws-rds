@@ -58,6 +58,7 @@ EOF
     Tenant      = var.tenant
     Project     = var.name
     Environment = var.environment
+    Maintainer  = "Magicorn"
     Terraform   = "yes"
   }
 }

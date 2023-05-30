@@ -22,7 +22,7 @@ resource "random_password" "dbpass" {
 
 resource "aws_ssm_parameter" "main_db_host" {
   name        = "/${var.tenant}/${var.name}/${var.environment}/database/host"
-  description = "Managed by Cloud&Cloud"
+  description = "Managed by Magicorn"
   type        = "SecureString"
   value       = (var.aurora_cluster == true) ? aws_rds_cluster.main[0].endpoint : aws_db_instance.main[0].address
 
@@ -31,13 +31,14 @@ resource "aws_ssm_parameter" "main_db_host" {
     Tenant      = var.tenant
     Project     = var.name
     Environment = var.environment
+    Maintainer  = "Magicorn"
     Terraform   = "yes"
   }
 }
 
 resource "aws_ssm_parameter" "main_db_port" {
   name        = "/${var.tenant}/${var.name}/${var.environment}/database/port"
-  description = "Managed by Cloud&Cloud"
+  description = "Managed by Magicorn"
   type        = "SecureString"
   value       = var.port
 
@@ -46,13 +47,14 @@ resource "aws_ssm_parameter" "main_db_port" {
     Tenant      = var.tenant
     Project     = var.name
     Environment = var.environment
+    Maintainer  = "Magicorn"
     Terraform   = "yes"
   }
 }
 
 resource "aws_ssm_parameter" "main_db_name" {
   name        = "/${var.tenant}/${var.name}/${var.environment}/database/name"
-  description = "Managed by Cloud&Cloud"
+  description = "Managed by Magicorn"
   type        = "SecureString"
   value       = (var.aurora_cluster == true) ? aws_rds_cluster.main[0].database_name : aws_db_instance.main[0].db_name
 
@@ -61,13 +63,14 @@ resource "aws_ssm_parameter" "main_db_name" {
     Tenant      = var.tenant
     Project     = var.name
     Environment = var.environment
+    Maintainer  = "Magicorn"
     Terraform   = "yes"
   }
 }
 
 resource "aws_ssm_parameter" "main_db_user" {
   name        = "/${var.tenant}/${var.name}/${var.environment}/database/user"
-  description = "Managed by Cloud&Cloud"
+  description = "Managed by Magicorn"
   type        = "SecureString"
   value       = (var.aurora_cluster == true) ? aws_rds_cluster.main[0].master_username : aws_db_instance.main[0].username
 
@@ -76,13 +79,14 @@ resource "aws_ssm_parameter" "main_db_user" {
     Tenant      = var.tenant
     Project     = var.name
     Environment = var.environment
+    Maintainer  = "Magicorn"
     Terraform   = "yes"
   }
 }
 
 resource "aws_ssm_parameter" "main_db_pass" {
   name        = "/${var.tenant}/${var.name}/${var.environment}/database/pass"
-  description = "Managed by Cloud&Cloud"
+  description = "Managed by Magicorn"
   type        = "SecureString"
   value       = random_password.dbpass.result
 
@@ -91,6 +95,7 @@ resource "aws_ssm_parameter" "main_db_pass" {
     Tenant      = var.tenant
     Project     = var.name
     Environment = var.environment
+    Maintainer  = "Magicorn"
     Terraform   = "yes"
   }
 }

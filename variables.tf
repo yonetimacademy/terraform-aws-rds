@@ -3,7 +3,7 @@ variable "name" {}
 variable "environment" {}
 variable "vpc_id" {}
 variable "cidr_block" {}
-variable "db_subnet_ids" {}
+variable "subnet_ids" {}
 variable "aurora_cluster" {}
 variable "multi_az" {}
 variable "port" {}
