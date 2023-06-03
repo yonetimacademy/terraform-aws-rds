@@ -4,12 +4,14 @@ variable "environment" {}
 variable "vpc_id" {}
 variable "cidr_block" {}
 variable "subnet_ids" {}
+variable "encryption" {}
+variable "kms_key_id" {}
 variable "aurora_cluster" {}
+variable "database_name" {}
 variable "multi_az" {}
 variable "port" {}
 variable "instance_type" {}
 variable "engine_version" {}
-variable "encryption" {}
 variable "maintenance_window" {}
 variable "backup_window" {}
 variable "backup_retention_period" {}

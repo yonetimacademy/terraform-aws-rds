@@ -1,6 +1,6 @@
 resource "aws_rds_cluster_parameter_group" "main" {
   count       = (var.aurora_cluster == true) ? 1 : 0
-  name        = "${var.tenant}-${var.name}-rds-cpg-${var.environment}"
+  name        = "${var.tenant}-${var.name}-rds-${var.database_name}-cpg-${var.environment}"
   description = "Managed by Magicorn"
   family      = (var.aurora_cluster == true) ? var.aurora_parameter_group : var.parameter_group
 
@@ -13,7 +13,7 @@ resource "aws_rds_cluster_parameter_group" "main" {
   }
 
   tags = {
-    Name        = "${var.tenant}-${var.name}-rds-cpg-${var.environment}"
+    Name        = "${var.tenant}-${var.name}-rds-${var.database_name}-cpg-${var.environment}"
     Tenant      = var.tenant
     Project     = var.name
     Environment = var.environment

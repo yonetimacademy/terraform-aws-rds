@@ -1,5 +1,5 @@
 resource "aws_db_parameter_group" "main" {
-  name        = "${var.tenant}-${var.name}-rds-pg-${var.environment}"
+  name        = "${var.tenant}-${var.name}-rds-${var.database_name}-pg-${var.environment}"
   description = "Managed by Magicorn"
   family      = (var.aurora_cluster == true) ? var.aurora_parameter_group : var.parameter_group
 
@@ -12,7 +12,7 @@ resource "aws_db_parameter_group" "main" {
   }
 
   tags = {
-    Name        = "${var.tenant}-${var.name}-rds-pg-${var.environment}"
+    Name        = "${var.tenant}-${var.name}-rds-${var.database_name}-pg-${var.environment}"
     Tenant      = var.tenant
     Project     = var.name
     Environment = var.environment

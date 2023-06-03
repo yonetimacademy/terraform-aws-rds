@@ -10,19 +10,19 @@ resource "aws_db_instance" "main" {
   db_name                     = random_string.dbname.result
   engine                      = "postgres"
   engine_version              = var.engine_version
-  identifier                  = "${var.tenant}-${var.name}-rds-${var.environment}"
+  identifier                  = "${var.tenant}-${var.name}-${var.database_name}-${var.environment}"
   instance_class              = var.instance_type
   username                    = random_string.dbuser.result
   password                    = random_password.dbpass.result
   parameter_group_name        = aws_db_parameter_group.main.id
   skip_final_snapshot         = false
   storage_encrypted           = (var.encryption == true) ? true : false
-  kms_key_id                  = (var.encryption == true) ? aws_kms_key.main[0].arn : null
+  kms_key_id                  = (var.encryption == true) ? var.kms_key_id : null
   storage_type                = var.storage_type
   storage_throughput          = var.storage_throughput
   allocated_storage           = var.allocated_storage
   max_allocated_storage       = var.max_allocated_storage
-  final_snapshot_identifier   = "${var.tenant}-${var.name}-rds-final-${random_id.backup.hex}-${var.environment}"
+  final_snapshot_identifier   = "${var.tenant}-${var.name}-${var.database_name}-final-${random_id.backup.hex}-${var.environment}"
   backup_retention_period     = var.backup_retention_period
   backup_window               = var.backup_window
   maintenance_window          = var.maintenance_window
@@ -34,7 +34,7 @@ resource "aws_db_instance" "main" {
   apply_immediately           = var.apply_immediately
 
   tags = {
-    Name        = "${var.tenant}-${var.name}-rds-${var.environment}"
+    Name        = "${var.tenant}-${var.name}-${var.database_name}-${var.environment}"
     Tenant      = var.tenant
     Project     = var.name
     Environment = var.environment
@@ -51,17 +51,17 @@ resource "aws_rds_cluster" "main" {
   engine                          = "aurora-postgresql"
   engine_mode                     = "provisioned"
   engine_version                  = var.engine_version
-  cluster_identifier              = "${var.tenant}-${var.name}-rds-${var.environment}"
+  cluster_identifier              = "${var.tenant}-${var.name}-${var.database_name}-${var.environment}"
   database_name                   = random_string.dbname.result
   master_username                 = random_string.dbuser.result
   master_password                 = random_password.dbpass.result
   backup_retention_period         = var.backup_retention_period
   preferred_backup_window         = var.backup_window
   preferred_maintenance_window    = var.maintenance_window
-  final_snapshot_identifier       = "${var.tenant}-${var.name}-rds-final-${random_id.backup.hex}-${var.environment}"
+  final_snapshot_identifier       = "${var.tenant}-${var.name}-${var.database_name}-final-${random_id.backup.hex}-${var.environment}"
   copy_tags_to_snapshot           = true
   storage_encrypted               = (var.encryption == true) ? true : false
-  kms_key_id                      = (var.encryption == true) ? aws_kms_key.main[0].arn : null
+  kms_key_id                      = (var.encryption == true) ? var.kms_key_id : null
   allow_major_version_upgrade     = var.allow_major_version_upgrade
   db_cluster_parameter_group_name = aws_rds_cluster_parameter_group.main[0].id
   db_subnet_group_name            = aws_db_subnet_group.main.name
@@ -69,7 +69,7 @@ resource "aws_rds_cluster" "main" {
   apply_immediately               = var.apply_immediately
 
   tags = {
-    Name        = "${var.tenant}-${var.name}-rds-${var.environment}"
+    Name        = "${var.tenant}-${var.name}-${var.database_name}-${var.environment}"
     Tenant      = var.tenant
     Project     = var.name
     Environment = var.environment
@@ -80,7 +80,7 @@ resource "aws_rds_cluster" "main" {
 
 resource "aws_rds_cluster_instance" "main" {
   count                      = (var.aurora_cluster == true && var.multi_az == true) ? var.replica_count+1 : 0
-  identifier                 = "${var.tenant}-${var.name}-rds-${var.environment}-${count.index+1}"
+  identifier                 = "${var.tenant}-${var.name}-${var.database_name}-${var.environment}-${count.index+1}"
   instance_class             = var.instance_type
   cluster_identifier         = aws_rds_cluster.main[0].id
   engine                     = aws_rds_cluster.main[0].engine
@@ -93,7 +93,7 @@ resource "aws_rds_cluster_instance" "main" {
   apply_immediately          = var.apply_immediately
 
   tags = {
-    Name        = "${var.tenant}-${var.name}-rds-${var.environment}-${count.index+1}"
+    Name        = "${var.tenant}-${var.name}-${var.database_name}-${var.environment}-${count.index+1}"
     Tenant      = var.tenant
     Project     = var.name
     Environment = var.environment
