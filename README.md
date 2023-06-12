@@ -4,8 +4,8 @@ Cloud&Cloud made Terraform Module for AWS Provider
 --
 ```
 module "rds" {
-  source         = "magicorntech/rds/aws"
-  version        = "0.0.3"
+  source         = "yonetimacademy/rds/aws"
+  version        = "0.0.1"
   tenant         = var.tenant
   name           = var.name
   environment    = var.environment
@@ -44,5 +44,5 @@ module "rds" {
 ```
 
 ## Notes
-1) Works better with magicorn-aws-kms module.
+1) Works better with yonetimacademy-aws-kms module.
 2) Supports RDS and Aurora PostgreSQLs only (yet).
