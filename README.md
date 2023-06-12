@@ -45,4 +45,4 @@ module "rds" {
 
 ## Notes
 1) Works better with yonetimacademy-aws-kms module.
-2) Supports RDS and Aurora PostgreSQLs only (yet).
+2) Supports RDS and Aurora PostgreSQLs only (yet)..
