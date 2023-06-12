@@ -1,6 +1,6 @@
 # terraform-aws-rds
 
-Magicorn made Terraform Module for AWS Provider
+Cloud&Cloud made Terraform Module for AWS Provider
 --
 ```
 module "rds" {

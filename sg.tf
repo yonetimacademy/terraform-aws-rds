@@ -1,6 +1,6 @@
 resource "aws_security_group" "main" {
   name        = "${var.tenant}-${var.name}-rds-${var.database_name}-sg-${var.environment}"
-  description = "Managed by Magicorn"
+  description = "Managed by yonetimacademy"
   vpc_id      = var.vpc_id
 
   ingress {
@@ -22,7 +22,7 @@ resource "aws_security_group" "main" {
     Tenant      = var.tenant
     Project     = var.name
     Environment = var.environment
-    Maintainer  = "Magicorn"
+    Maintainer  = "yonetimacademy"
     Terraform   = "yes"
   }
 }
