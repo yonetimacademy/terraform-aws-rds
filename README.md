@@ -13,7 +13,7 @@ module "rds" {
   cidr_block     = var.cidr_block
   subnet_ids     = var.subnet_ids
   encryption     = true # 1
-  kms_key_id     = var.rds_key_id
+  kms_key_id     = var.rds_key_id[0]
   aurora_cluster = false
 
   # RDS Configuration (Generic)
