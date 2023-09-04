@@ -1,6 +1,13 @@
 data "aws_caller_identity" "current" {}
 data "aws_region" "current" {}
 
+locals {
+  engine = (
+    (var.engine == "postgres") ? "aurora-postgresql" : null ||
+    (var.engine == "mysql") ? "aurora-mysql" : null
+  )
+}
+
 resource "random_string" "dbname" {
   length  = 10
   numeric = false

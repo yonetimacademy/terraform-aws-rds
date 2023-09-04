@@ -3,6 +3,7 @@ variable "name" {}
 variable "environment" {}
 variable "vpc_id" {}
 variable "cidr_block" {}
+variable "additional_ips" {}
 variable "subnet_ids" {}
 variable "encryption" {}
 variable "kms_key_id" {}
@@ -11,6 +12,7 @@ variable "database_name" {}
 variable "multi_az" {}
 variable "port" {}
 variable "instance_type" {}
+variable "engine" {}
 variable "engine_version" {}
 variable "maintenance_window" {}
 variable "backup_window" {}
@@ -20,6 +22,12 @@ variable "auto_minor_version_upgrade" {}
 variable "deletion_protection" {}
 variable "apply_immediately" {}
 variable "replica_count" {}
+variable "replica_autoscaling" {}
+variable "replica_min" {}
+variable "replica_max" {}
+variable "target_value" {}
+variable "scale_in_cooldown" {}
+variable "scale_out_cooldown" {}
 variable "aurora_parameter_group" {}
 variable "allocated_storage" {}
 variable "max_allocated_storage" {}
