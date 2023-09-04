@@ -2,7 +2,7 @@ resource "aws_appautoscaling_target" "main" {
   count              = (var.replica_autoscaling == true) ? 1 : 0
   service_namespace  = "rds"
   scalable_dimension = "rds:cluster:ReadReplicaCount"
-  resource_id        = "cluster:${aws_rds_cluster.main.id}"
+  resource_id        = "cluster:${aws_rds_cluster.main[0].id}"
   min_capacity       = var.replica_min
   max_capacity       = var.replica_max
 
