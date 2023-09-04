@@ -15,6 +15,7 @@ module "rds" {
   encryption     = true # 1
   kms_key_id     = var.rds_key_id[0]
   aurora_cluster = false
+  additional_ips = ["10.10.0.0/16", "172.31.0.0/16"] # should be set empty []
 
   # RDS Configuration (Generic)
   database_name               = "master"
@@ -31,7 +32,7 @@ module "rds" {
   apply_immediately           = true
 
   # RDS Configuration (If == Aurora)
-  replica_count          = 2
+  replica_count          = 2 # needed for read replicas managed outside autoscaling.
   replica_autoscaling    = true
   replica_min            = 1
   replica_max            = 15
