@@ -22,6 +22,7 @@ module "rds" {
   multi_az                    = false
   port                        = 5432
   instance_type               = "db.t4g.small"
+  engine                      = "postgres" # mysql or mariadb
   engine_version              = "14.7"
   maintenance_window          = "sun:02:00-sun:03:00"
   backup_window               = "01:00-02:00"

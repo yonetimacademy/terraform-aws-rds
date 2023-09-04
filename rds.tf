@@ -8,7 +8,7 @@ resource "aws_db_instance" "main" {
   count                       = (var.aurora_cluster == false) ? 1 : 0
   deletion_protection         = var.deletion_protection
   db_name                     = random_string.dbname.result
-  engine                      = "postgres"
+  engine                      = var.engine
   engine_version              = var.engine_version
   identifier                  = "${var.tenant}-${var.name}-${var.database_name}-${var.environment}"
   instance_class              = var.instance_type
@@ -48,7 +48,7 @@ resource "aws_db_instance" "main" {
 resource "aws_rds_cluster" "main" {
   count                           = (var.aurora_cluster == true) ? 1 : 0
   deletion_protection             = var.deletion_protection
-  engine                          = "aurora-postgresql"
+  engine                          = local.engine
   engine_mode                     = "provisioned"
   engine_version                  = var.engine_version
   cluster_identifier              = "${var.tenant}-${var.name}-${var.database_name}-${var.environment}"

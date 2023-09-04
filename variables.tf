@@ -12,6 +12,7 @@ variable "database_name" {}
 variable "multi_az" {}
 variable "port" {}
 variable "instance_type" {}
+variable "engine" {}
 variable "engine_version" {}
 variable "maintenance_window" {}
 variable "backup_window" {}
