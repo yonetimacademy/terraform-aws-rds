@@ -5,7 +5,7 @@ Magicorn made Terraform Module for AWS Provider
 ```
 module "rds" {
   source         = "magicorntech/rds/aws"
-  version        = "0.0.3"
+  version        = "0.0.4"
   tenant         = var.tenant
   name           = var.name
   environment    = var.environment
@@ -32,6 +32,12 @@ module "rds" {
 
   # RDS Configuration (If == Aurora)
   replica_count          = 2
+  replica_autoscaling    = true
+  replica_min            = 1
+  replica_max            = 15
+  target_value           = 50
+  scale_in_cooldown      = 300
+  scale_out_cooldown     = 300
   aurora_parameter_group = "aurora-postgresql14"
 
   # RDS Configuration (If =! Aurora)

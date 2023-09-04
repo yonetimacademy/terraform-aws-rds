@@ -20,6 +20,12 @@ variable "auto_minor_version_upgrade" {}
 variable "deletion_protection" {}
 variable "apply_immediately" {}
 variable "replica_count" {}
+variable "replica_autoscaling" {}
+variable "replica_min" {}
+variable "replica_max" {}
+variable "target_value" {}
+variable "scale_in_cooldown" {}
+variable "scale_out_cooldown" {}
 variable "aurora_parameter_group" {}
 variable "allocated_storage" {}
 variable "max_allocated_storage" {}
