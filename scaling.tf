@@ -6,14 +6,7 @@ resource "aws_appautoscaling_target" "main" {
   min_capacity       = var.replica_min
   max_capacity       = var.replica_max
 
-  tags = {
-    Name        = "${var.tenant}-${var.name}-${var.database_name}-ast-${var.environment}"
-    Tenant      = var.tenant
-    Project     = var.name
-    Environment = var.environment
-    Maintainer  = "yonetimacademy"
-    Terraform   = "yes"
-  }
+
 }
 
 resource "aws_appautoscaling_policy" "main" {
